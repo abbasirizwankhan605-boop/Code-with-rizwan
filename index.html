@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code With Rizwan</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #eef4ff;
+  color: #172554;
+}
+
+header {
+  background: #172554;
+  color: white;
+  text-align: center;
+  padding: 28px 15px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  color: #bfdbfe;
+}
+
+.container {
+  max-width: 520px;
+  margin: 25px auto;
+  padding: 15px;
+}
+
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px #0001;
+  margin-bottom: 20px;
+}
+
+.lesson-number {
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.progress-bg {
+  background: #dbeafe;
+  height: 10px;
+  border-radius: 20px;
+  margin: 15px 0;
+}
+
+.progress {
+  height: 10px;
+  background: #2563eb;
+  width: 20%;
+  border-radius: 20px;
+  transition: .3s;
+}
+
+h2 {
+  font-size: 23px;
+}
+
+.lesson-text {
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+.tip {
+  background: #eff6ff;
+  border-left: 4px solid #2563eb;
+  padding: 13px;
+  border-radius: 8px;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+button {
+  flex: 1;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #94a3b8;
+}
+
+.check {
+  line-height: 2.3;
+}
+
+.check input {
+  accent-color: #2563eb;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #64748b;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>💻 Code With Rizwan</h1>
+  <p>Learn Coding Step by Step 🚀</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <div class="lesson-number" id="number">
+      LESSON 1 OF 5
+    </div>
+
+    <div class="progress-bg">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <h2 id="title"></h2>
+
+    <div class="lesson-text" id="content"></div>
+
+    <div class="tip" id="tip"></div>
+
+    <div class="buttons">
+      <button id="prev" onclick="changeLesson(-1)">
+        ← Previous
+      </button>
+
+      <button id="next" onclick="changeLesson(1)">
+        Next →
+      </button>
+    </div>
+
+  </div>
+
+  <div class="card check">
+    <h3>✅ My Learning Checklist</h3>
+
+    <label>
+      <input type="checkbox">
+      GitHub account created
+    </label><br>
+
+    <label>
+      <input type="checkbox">
+      Repository created
+    </label><br>
+
+    <label>
+      <input type="checkbox">
+      HTML file uploaded
+    </label><br>
+
+    <label>
+      <input type="checkbox">
+      GitHub Pages enabled
+    </label><br>
+
+    <label>
+      <input type="checkbox">
+      Website published
+    </label>
+  </div>
+
+</div>
+
+<footer>
+  Made with 💙 by Code With Rizwan
+</footer>
+
+<script>
+
+const lessons = [
+
+{
+ title: "Create a GitHub Account",
+ content: `1. Open Chrome browser.
+2. Visit github.com
+3. Tap Sign up.
+4. Enter your email.
+5. Create your password.
+6. Complete account verification.`,
+ tip: "💡 Tip: If you already have an account, simply sign in."
+},
+
+{
+ title: "Create a Repository",
+ content: `1. Login to GitHub.
+2. Tap the + icon.
+3. Select New repository.
+4. Enter name: my-website
+5. Select Public.
+6. Tap Create repository.`,
+ tip: "💡 Tip: A repository is where your website files are stored."
+},
+
+{
+ title: "Upload Your HTML File",
+ content: `1. Open your new repository.
+2. Tap Add file.
+3. Select Upload files.
+4. Choose your index.html file.
+5. Wait for upload.
+6. Tap Commit changes.`,
+ tip: "⚠️ Important: Your main file should be named index.html."
+},
+
+{
+ title: "Enable GitHub Pages",
+ content: `1. Open repository Settings.
+2. Find Pages.
+3. Under Build and deployment,
+   select Deploy from a branch.
+4. Select main.
+5. Select /(root).
+6. Tap Save.`,
+ tip: "💡 Tip: GitHub Pages makes your website available online."
+},
+
+{
+ title: "Your Website Is Live!",
+ content: `1. Wait a little while.
+2. Open Settings → Pages.
+3. Find your published website link.
+4. Tap Visit site.
+
+🎉 Congratulations!
+Your website is now online!`,
+ tip: "Your link usually looks like: https://username.github.io/my-website/"
+}
+
+];
+
+let current = 0;
+
+function showLesson() {
+
+  const lesson = lessons[current];
+
+  document.getElementById("number").innerText =
+    `LESSON ${current + 1} OF ${lessons.length}`;
+
+  document.getElementById("title").innerText =
+    lesson.title;
+
+  document.getElementById("content").innerText =
+    lesson.content;
+
+  document.getElementById("tip").innerText =
+    lesson.tip;
+
+  document.getElementById("progress").style.width =
+    ((current + 1) / lessons.length * 100) + "%";
+
+  document.getElementById("prev").disabled =
+    current === 0;
+
+  document.getElementById("next").innerText =
+    current === lessons.length - 1
+    ? "Start Again ↻"
+    : "Next →";
+
+}
+
+function changeLesson(direction) {
+
+  if (current === lessons.length - 1 && direction === 1) {
+    current = 0;
+  } else {
+    current = Math.max(
+      0,
+      Math.min(lessons.length - 1, current + direction)
+    );
+  }
+
+  showLesson();
+
+}
+
+showLesson();
+
+</script>
+
+</body>
+</html>
